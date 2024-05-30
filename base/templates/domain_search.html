@@ -1,0 +1,77 @@
+<!-- domain_search.html -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Domain Search</title>
+    <style>
+        table {
+            width: 50%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+            text-align: left;
+        }
+        .available {
+            color: #007bff;
+            font-weight: bold;
+        }
+
+        .not-available {
+            color: #dc3545;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Domain Search</h1>
+    <form method="get" action="{% url 'domain_search' %}">
+        <label for="domain">Domain:</label>
+        <input type="text" id="domain" name="domain">
+        <button type="submit">Search</button>
+    </form>
+
+    {% if domain_info %}
+    <div class="result">
+        <p>Domain Name: <span class="domain">{{ domain_info.Domain }}</span></p>
+        <p class="{% if domain_info.available %}available{% else %}not-available{% endif %}">Result: {{ domain_info.available }}</p>
+    </div>
+        <h2>Domain Information</h2>
+        <table>
+            <tr>
+                <th>Field</th>
+                <th>Value</th>
+            </tr>
+            <tr>
+                <td>Domain</td>
+                <td>{{ domain_info.Domain }}</td>
+            </tr>
+            <tr>
+                <td>Status</td>
+                <td>{{ domain_info.status }}</td>
+            </tr>
+            <tr>
+                <td>Rgistrant</td>
+                <td>{{ domain_info.Registrant_at }}</td>
+            </tr>
+            <tr>
+                <td>Created Time</td>
+                <td>{{ domain_info.Created_at }}</td>
+            </tr>
+            <tr>
+                <td>Expiring Time</td>
+                <td>{{ domain_info.expires_at }}</td>
+            </tr>
+
+        </table>
+    {% elif error %}
+        <p>{{ error }}</p>
+    {% endif %}
+</body>
+</html>
