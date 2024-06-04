@@ -1,50 +1,32 @@
-<!-- domain_search.html -->
+{% extends 'navbar.html' %}
+{% block content %}
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Domain Search</title>
-    <style>
-        table {
-            width: 50%;
-            border-collapse: collapse;
-            margin: 20px 0;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-        }
-        th {
-            background-color: #f2f2f2;
-            text-align: left;
-        }
-        .available {
-            color: #007bff;
-            font-weight: bold;
-        }
-
-        .not-available {
-            color: #dc3545;
-            font-weight: bold;
-        }
-    </style>
-</head>
-<body>
+<div class="center-container">
     <h1>Domain Search</h1>
+    <p class="sm-title">Check availability and information of any domain</p>
     <form method="get" action="{% url 'domain_search' %}">
-        <label for="domain">Domain:</label>
-        <input type="text" id="domain" name="domain">
-        <button type="submit">Search</button>
+        
+        <input class="input-domain" type="text" placeholder="Enter Domain eg: google.com" id="domain" name="domain">
+        <br>
+        <button  type="submit" class="domain-search">Search</button>
     </form>
 
     {% if domain_info %}
     <div class="result">
-        <p>Domain Name: <span class="domain">{{ domain_info.Domain }}</span></p>
-        <p class="{% if domain_info.available %}available{% else %}not-available{% endif %}">Result: {{ domain_info.available }}</p>
+        
+        <p class="{% if domain_info.available %}available{% else %}not-available{% endif %}">
+            The domain {{ domain_info.Domain }} is 
+            {% if domain_info.available %}
+                available
+            {% else %}
+                not available
+            {% endif %}
+        </p>
     </div>
-        <h2>Domain Information</h2>
+    <strong>Details:</strong>
+    <div class="table-container">
         <table>
-            <tr>
+            <tr class="table-header">
                 <th>Field</th>
                 <th>Value</th>
             </tr>
@@ -54,10 +36,16 @@
             </tr>
             <tr>
                 <td>Status</td>
-                <td>{{ domain_info.status }}</td>
+                <td>
+                    {% if domain_info.status %}
+                        active
+                    {% else %}
+                        inactive
+                    {% endif %}
+                </td>
             </tr>
             <tr>
-                <td>Rgistrant</td>
+                <td>Registrant</td>
                 <td>{{ domain_info.Registrant_at }}</td>
             </tr>
             <tr>
@@ -68,10 +56,12 @@
                 <td>Expiring Time</td>
                 <td>{{ domain_info.expires_at }}</td>
             </tr>
-
         </table>
+
+    </div>
+
     {% elif error %}
         <p>{{ error }}</p>
     {% endif %}
-</body>
-</html>
+</div>
+{% endblock %}

@@ -2,6 +2,11 @@ from django.shortcuts import render
 import requests
 from django.http import JsonResponse
 
+
+def home_view(request):
+    return render(request, 'home.html')
+
+
 def domain_search_view(request):
     context = {}
     if 'domain' in request.GET:
@@ -11,7 +16,7 @@ def domain_search_view(request):
             # Here, make a request to the external API that provides domain information.
             url = "https://domain-checker7.p.rapidapi.com/whois"
             headers = {
-       "X-RapidAPI-Key": "478e15fba5msh79e82dee7dd1d54p163c65jsne047a8c05330",
+       "X-RapidAPI-Key": "aadafe507dmsha55d46d8c220ac6p1f0ecfjsn164723e7d1d8",
        "X-RapidAPI-Host": "domain-checker7.p.rapidapi.com"
   } 
             params = {"domain": domain}
