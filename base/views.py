@@ -1,6 +1,7 @@
 from django.shortcuts import render
 import requests
 from django.http import JsonResponse
+import os
 
 
 def home_view(request):
@@ -16,7 +17,7 @@ def domain_search_view(request):
             # Here, make a request to the external API that provides domain information.
             url = "https://domain-checker7.p.rapidapi.com/whois"
             headers = {
-       "X-RapidAPI-Key": "aadafe507dmsha55d46d8c220ac6p1f0ecfjsn164723e7d1d8",
+       "X-RapidAPI-Key": os.getenv('RAPIDAPI_KEY'),
        "X-RapidAPI-Host": "domain-checker7.p.rapidapi.com"
   } 
             params = {"domain": domain}
