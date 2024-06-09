@@ -1,67 +1,84 @@
 {% extends 'navbar.html' %}
 {% block content %}
 
-<div class="center-container">
-    <h1>Domain Search</h1>
-    <p class="sm-title">Check availability and information of any domain</p>
-    <form method="get" action="{% url 'domain_search' %}">
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+
+            <div class="center-container">
+                <h1>Domain Search</h1>
+                <p class="sm-title">Check availability and information of any domain</p>
+                <form method="get" action="{% url 'domain_search' %}">
+                    <div class="form-group">
+                        <input class="input-domain form-control" type="text" placeholder="Enter Domain eg: google.com" value="{{ request.GET.domain }}" id="domain" name="domain">
+                        
+                        
+                    </div>
+                    <button  type="submit" class="btn btn-primary domain-search btn-block">Search</button>
+
+
+                </form>
+            
+                {% if domain_info %}
+                <div class="result">
+                    
+                    <p class="{% if domain_info.available %}available{% else %}not-available{% endif %}">
+                        The domain {{ domain_info.Domain }} is 
+                        {% if domain_info.available %}
+                            available
+                        {% else %}
+                            not available
+                        {% endif %}
+                    </p>
+                </div>
+                <strong>Details:</strong>
+                <div class="table-container">
+                    <table>
+                        <tr class="table-header">
+                            <th>Field</th>
+                            <th>Value</th>
+                        </tr>
+                        <tr>
+                            <td>Domain</td>
+                            <td>{{ domain_info.Domain }}</td>
+                        </tr>
+                        <tr>
+                            <td>Status</td>
+                            <td>
+                                {% if domain_info.status %}
+                                    active
+                                {% else %}
+                                    inactive
+                                {% endif %}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Registrant</td>
+                            <td>{{ domain_info.Registrant_at }}</td>
+                        </tr>
+                        <tr>
+                            <td>Created Time</td>
+                            <td>{{ domain_info.Created_at }}</td>
+                        </tr>
+                        <tr>
+                            <td>Expiring Time</td>
+                            <td>{{ domain_info.expires_at }}</td>
+                        </tr>
+                    </table>
+            
+                </div>
+            
+                {% elif error %}
+                    <p>{{ error }}</p>
+                {% endif %}
+            </div>
+
+        </div>
+
+
         
-        <input class="input-domain" type="text" placeholder="Enter Domain eg: google.com" id="domain" name="domain">
-        <br>
-        <button  type="submit" class="domain-search">Search</button>
-    </form>
-
-    {% if domain_info %}
-    <div class="result">
-        
-        <p class="{% if domain_info.available %}available{% else %}not-available{% endif %}">
-            The domain {{ domain_info.Domain }} is 
-            {% if domain_info.available %}
-                available
-            {% else %}
-                not available
-            {% endif %}
-        </p>
     </div>
-    <strong>Details:</strong>
-    <div class="table-container">
-        <table>
-            <tr class="table-header">
-                <th>Field</th>
-                <th>Value</th>
-            </tr>
-            <tr>
-                <td>Domain</td>
-                <td>{{ domain_info.Domain }}</td>
-            </tr>
-            <tr>
-                <td>Status</td>
-                <td>
-                    {% if domain_info.status %}
-                        active
-                    {% else %}
-                        inactive
-                    {% endif %}
-                </td>
-            </tr>
-            <tr>
-                <td>Registrant</td>
-                <td>{{ domain_info.Registrant_at }}</td>
-            </tr>
-            <tr>
-                <td>Created Time</td>
-                <td>{{ domain_info.Created_at }}</td>
-            </tr>
-            <tr>
-                <td>Expiring Time</td>
-                <td>{{ domain_info.expires_at }}</td>
-            </tr>
-        </table>
-
-    </div>
-
-    {% elif error %}
-        <p>{{ error }}</p>
-    {% endif %}
 </div>
+
 {% endblock %}
