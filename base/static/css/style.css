@@ -1,10 +1,19 @@
-body {
-    background-color: rgba(30, 29, 64);
-    font-family: Raleway, sans-serif;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+@supports (background-blend-mode: multiply) {
+    body {
+        background: url("/static/images/domain5.jpg"), radial-gradient(#444, #111);
+        background-blend-mode: multiply;
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: cover;
+        font-family: Raleway, sans-serif;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+    }
+
 }
+
 
 .content {
     flex: 1;
@@ -13,9 +22,7 @@ body {
 
 
 
-.navbar {
-    background-color:  rgba(30, 29, 64);
-}
+
 
 .navbar-brand,
 .navbar-nav .nav-link {
@@ -23,13 +30,22 @@ body {
 }
 
 
+@supports (background-blend-mode: multiply) {
+    .jumbotron {
+        background: url("/static/images/domain5.jpg"), radial-gradient(#444, #111);
+        background-blend-mode: multiply;
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: cover;
+        color: #ffffff;
+        padding: 100px 0;
+        margin-bottom: 0;
+    
+    }
 
-.jumbotron {
-    background-color:  rgba(30, 29, 64);
-    color: #ffffff;
-    padding: 100px 0;
-    margin-bottom: 0;
 }
+
 
 .jumbotron h1 {
     font-size: 48px;
@@ -51,12 +67,20 @@ label{
     background-color: #ffca2c;
     border-color: #ffc107;
     color:black;
+    text-decoration: #000;
+
+}
+
+.btn-primary:active {
+    background-color: #fff; /* Change this to your desired color */
 }
 
 .btn-primary:hover {
     background-color: #ffca2c;
     border-color: #ffca2c;
 }
+
+
 
 .footer {
     color: #ffffff;
@@ -70,39 +94,16 @@ label{
     color:#fff;
     margin-right: 100px;
 }
-input[type="text"],
-.domain-search
-{
-    width: 600px;
-    
-    padding: 10px;
-    margin-bottom: 20px;
-    margin-right: 100px;
-    border: none;
-    border-bottom: 3px solid #fff; /* Underline border */
-    font-size: 16px;
-    color: #fff;
-    outline: none; /* Remove default focus outline */
-}
+
 
 input[type="text"]:focus {
     border-color: #fff; /* Change border color on focus */
 }
 
-input[type="submit"] {
-    background-color: #ffca2c;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    margin-right: 525px;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-}
+
 
 .center-container {
     text-align: center;
-    background-color: rgba(30, 29, 64);
     color:#fff;
     padding: 20px;
     border-radius: 8px;
@@ -130,46 +131,40 @@ form {
     
 }
 
-.input-domain[type="text"],
-.domain-search
-{
-    padding: 2px;
-    margin-right: 10px;
-    border: 2px solid #fff;
-    border-radius: 4px;
-    width: 800px;
-    background-color: #fff;
-    padding: 8px 18px;
-}
-
-.input-domain[type="text"]:focus{
-    border-color: #ffca2c;
-}
-.input-domain[type="text"]{
-    margin-left: 75px;
-}
-
-
-.domain-search{
-    background-color: #ffc107;
-    margin-left: 75px;
-    padding-bottom: 20px;
+.form-control{
     border: none;
+    border-bottom: 3px solid #fff; /* Underline border */
+    font-size: 16px;
+    color: #000;
+    outline: none; /* Remove default focus outline */
+}
+
+.form-control:focus {
+    border-color: #ffca2c; /* Change border color on focus */
+}
+
+.btn-block.domain-search {
+    background-color: #ffc107;
     padding: 10px 20px;
     font-weight: bolder;
     font-size: 16px;
     cursor: pointer;
     color: #000;
     font-size: medium;
-
 }
+
+
+
+
+
+
 strong{
     margin-right: 770px;
     margin-bottom: 20px;
 }
 
 table {
-    width: 70%; /* Adjust width as needed */
+    width: 100%; /* Adjust width as needed */
     margin: 0 auto;
     border-collapse: collapse;
     margin-top: 20px;
@@ -196,4 +191,19 @@ th {
 .not-available {
     color: red;
 }
+/* Media Queries for Responsiveness */
+@media (max-width: 767px) {
+    .form-control.input-lg,
+    .btn-block.domain-search {
+        width: 100%;
+        margin-right: 0;
+        margin-left: 0;
+    }
+
+    .sm-title {
+        font-size: medium;
+    }
+}
+
+
 
